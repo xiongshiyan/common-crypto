@@ -1,4 +1,4 @@
-def VERSION = '1.2'
+def VERSION = '1.3'
 def ARTIFACT_ID = 'common-crypto'
 def GROUP_ID = 'top.jfunc.common'
 def TYPE = 'jar'
