@@ -1,5 +1,5 @@
 ##  加密解密模块(crypto)
-
+## 使用方式 compile 'top.jfunc.common:common-crypto:1.3'
 ### 1.Crypto接口
 
 本模块主要定义了`Crypto`接口，抽象了加密和解密。分别有对称加密实现和非对称加密实现，可以有不同的实现算法，所以理论上支持所有的加密解密方式。对于摘要算法，亦可应用该接口，只是不可逆而已。通过`CompositeCrypto`可以轻松实现多层加密解密。Crypto接口的实现有对称实现(AES/DES/...)，非对称实现(RSA...)，摘要实现(MD5/hmac...)。感谢Looly提供的各种算法实现。

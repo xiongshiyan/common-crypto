@@ -3,6 +3,8 @@ def ARTIFACT_ID = 'common-crypto'
 def GROUP_ID = 'top.jfunc.common'
 def TYPE = 'jar'
 def DESCRIPTION = 'encrypt,decrypt interface implements by symmetric,asymmetric,digester'
+def gitUrl = 'https://gitee.com/xxssyyyyssxx/common-crypto.git'
+def siteUrl = 'https://gitee.com/xxssyyyyssxx/common-crypto'
 
 group GROUP_ID
 version VERSION
@@ -78,9 +80,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-
-def gitUrl = 'https://gitee.com/xxssyyyyssxx/common-crypto.git'
-def siteUrl = 'https://gitee.com/xxssyyyyssxx/common-crypto'
 
 install {
     repositories.mavenInstaller {
