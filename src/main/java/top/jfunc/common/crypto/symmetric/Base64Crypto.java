@@ -1,15 +1,13 @@
 package top.jfunc.common.crypto.symmetric;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 import top.jfunc.common.crypto.Crypto;
 import top.jfunc.common.crypto.CryptoException;
 import top.jfunc.common.utils.CharsetUtil;
+import top.jfunc.common.utils.IoUtil;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Base64;
 
 /**
  *  Base64加解密
@@ -19,9 +17,12 @@ public class Base64Crypto implements Crypto {
     @Override
     public byte[] encrypt(byte[] src) {
         try {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ///
+            /*ByteArrayOutputStream out = new ByteArrayOutputStream();
             new BASE64Encoder().encode(src,out);
-            return out.toByteArray();
+            return out.toByteArray();*/
+
+            return Base64.getEncoder().encode(src);
         } catch (Exception e) {
             throw new CryptoException(e);
         }
@@ -30,8 +31,10 @@ public class Base64Crypto implements Crypto {
     @Override
     public byte[] decrypt(byte[] src) {
         try {
-            ByteArrayInputStream in = new ByteArrayInputStream(src);
-            return new BASE64Decoder().decodeBuffer(in);
+            /*ByteArrayInputStream in = new ByteArrayInputStream(src);
+            return new BASE64Decoder().decodeBuffer(in);*/
+
+            return Base64.getDecoder().decode(src);
         } catch (Exception e) {
             throw new CryptoException(e);
         }
@@ -40,8 +43,13 @@ public class Base64Crypto implements Crypto {
     @Override
     public void encrypt(InputStream in, OutputStream out) {
         try {
-            new BASE64Encoder().encodeBuffer(in,out);
-            //什么区别？new BASE64Encoder().encode(in,out);
+            ///
+            /*new BASE64Encoder().encodeBuffer(in,out);
+            //什么区别？new BASE64Encoder().encode(in,out);*/
+
+            byte[] bytes = IoUtil.stream2Bytes(in);
+            byte[] encode = Base64.getEncoder().encode(bytes);
+            out.write(encode);
         } catch (Exception e) {
             throw new CryptoException(e);
         }
@@ -50,7 +58,11 @@ public class Base64Crypto implements Crypto {
     @Override
     public void decrypt(InputStream in, OutputStream out) {
         try {
-            new BASE64Decoder().decodeBuffer(in,out);
+            ///new BASE64Decoder().decodeBuffer(in,out);
+
+            byte[] bytes = IoUtil.stream2Bytes(in);
+            byte[] decode = Base64.getDecoder().decode(bytes);
+            out.write(decode);
         } catch (Exception e) {
             throw new CryptoException(e);
         }
@@ -58,7 +70,8 @@ public class Base64Crypto implements Crypto {
 
     @Override
     public String encrypt(String src, String charset) {
-        return new BASE64Encoder().encodeBuffer(src.getBytes(CharsetUtil.charset(charset)) ).trim();
+        ///return new BASE64Encoder().encodeBuffer(src.getBytes(CharsetUtil.charset(charset)) ).trim();
+        return Base64.getEncoder().encodeToString(src.getBytes(CharsetUtil.charset(charset)));
     }
 
     @Override
@@ -68,11 +81,15 @@ public class Base64Crypto implements Crypto {
 
     @Override
     public String decrypt(String src, String charset) {
-        try {
+        ///
+        /*try {
             return new String(new BASE64Decoder().decodeBuffer(src) , CharsetUtil.charset(charset)).trim();
         } catch (Exception e) {
             throw new CryptoException(e);
-        }
+        }*/
+
+        byte[] decode = Base64.getDecoder().decode(src);
+        return new String(decode , CharsetUtil.charset(charset));
     }
 
     @Override
