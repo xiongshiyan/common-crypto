@@ -47,6 +47,11 @@ public class CryptoTest {
         Assert.assertEquals("54aK6K+X6KiA",yy);
         Assert.assertEquals(src,crypto.decrypt(yy));
         Assert.assertEquals(src, Base64.decodeStr(yy));
+
+        crypto = new Base64OptCrypto(false , true);
+        String encrypt = crypto.encrypt(src);
+        Assert.assertEquals("54aK6K-X6KiA",encrypt);
+        Assert.assertEquals(src,crypto.decrypt(encrypt));
     }
     @Test
     public void testUrl() {
