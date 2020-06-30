@@ -34,10 +34,8 @@ public class DesCrypto implements KeyCrypto {
             SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
             IvParameterSpec iv = new IvParameterSpec(key.getBytes(ENCODING));
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
-            byte[] bytes =  cipher.doFinal(src);
-            return bytes;
+            return cipher.doFinal(src);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new CryptoException(e);
         }
     }
@@ -51,8 +49,7 @@ public class DesCrypto implements KeyCrypto {
             SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
             IvParameterSpec iv = new IvParameterSpec(key.getBytes(ENCODING));
             cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
-            byte[] retByte = cipher.doFinal(src);
-            return retByte;
+            return cipher.doFinal(src);
         } catch (Exception e) {
             throw new CryptoException(e);
         }

@@ -13,7 +13,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 
 /**
- * 原AESUtil
  * @author xiongshiyan at 2018/7/10
  */
 public class AesCrypto implements KeyCrypto {
@@ -50,8 +49,7 @@ public class AesCrypto implements KeyCrypto {
             //7.初始化密码器，第一个参数为加密(Encrypt_mode)或者解密解密(Decrypt_mode)操作，第二个参数为使用的KEY
             cipher.init(Cipher.ENCRYPT_MODE, key);
             //9.根据密码器的初始化方式--加密：将数据加密
-            byte[] byte_AES = cipher.doFinal(src);
-            return byte_AES;
+            return cipher.doFinal(src);
         } catch (Exception e) {
             throw new CryptoException(e);
         }

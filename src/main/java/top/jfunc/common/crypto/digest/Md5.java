@@ -6,7 +6,7 @@ import top.jfunc.common.crypto.CryptoException;
 import java.security.MessageDigest;
 
 /**
- * MD5加密
+ * MD5摘要
  * @author 熊诗言
  */
 public class Md5 extends AbstractDigestCrypto implements Crypto {

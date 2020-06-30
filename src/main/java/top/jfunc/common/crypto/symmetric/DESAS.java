@@ -61,7 +61,6 @@ public class DESAS implements KeyCrypto {
         for(int i = 0; i < arrBTmp.length && i < arrB.length; i++){
             arrB[i] = arrBTmp[i];
         }
-        Key key = new javax.crypto.spec.SecretKeySpec(arrB, "DES");
-        return key;
+        return new javax.crypto.spec.SecretKeySpec(arrB, "DES");
     }
 }
